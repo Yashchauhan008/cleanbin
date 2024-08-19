@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "../css/ReportDustbin.css";
 import axios from "axios"; // Make sure to install axios if you haven't
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import logo from '../assets/logo.png';
 
 const ReportDustbin = () => {
+  const navigate = useNavigate()
   const { DustbinId } = useParams();
   const [dustbin, setDustbin] = useState(null);
   const [filledUp, setFillUp] = useState(0);
   const [isDamaged, setIsDamaged] = useState(false);
-
-  const dustbinName = 101; // You can replace this with a dynamic value if needed
 
   useEffect(() => {
     // Fetch dustbin data from the API
@@ -27,11 +27,12 @@ const ReportDustbin = () => {
     };
 
     fetchDustbin();
-  }, [dustbinName]);
+  }, [DustbinId]);
 
   const handleSliderChange = (event) => {
     setFillUp(parseFloat(event.target.value));
   };
+
   const handleUpdateDustbin = async () => {
     try {
       console.log("Updating dustbin with data:", {
@@ -60,35 +61,54 @@ const ReportDustbin = () => {
 
   return (
     <>
-      <h1>{dustbin.color}</h1>
-      <h2>{dustbin.type}</h2>
-      <label className="slider">
-        <input
-          type="range"
-          className="level"
-          value={filledUp}
-          min="0"
-          max="100"
-          onChange={handleSliderChange}
-        />
-      </label>
-      <h2>Filled Up: {filledUp}%</h2>
-      <h2>Click button to report damaged dustbin</h2>
-      <h2>{isDamaged ? "Damaged" : "Not Damaged"}</h2>
-      <button
-        onClick={() => {
-          setIsDamaged(!isDamaged);
-        }}
-      >
-        Toggle Damaged Status
-      </button>
-      <button
-        onClick={() => {
-          handleUpdateDustbin();
-        }}
-      >
-        submit
-      </button>
+      <div className="ReportDustbin">
+        <div className="binlogo">
+          <img src={logo} alt="Logo" />
+        </div>
+        <label className="slider">
+          <input
+            type="range"
+            className={`level ${dustbin.color}`}
+            value={filledUp}
+            min="0"
+            max="100"
+            onChange={handleSliderChange}
+          />
+        </label>
+        <div className="bindata">
+          <h2>Filled Up: {filledUp}%</h2>
+          <h3>Click button to report damaged dustbin</h3>
+          <h4 className={`${dustbin.color}`}>{dustbin.type} waste dustbin</h4>
+        </div>
+        <div className="binbtns">
+          <button
+            className="button"
+            onClick={() => {
+              if (!isDamaged) {
+                setIsDamaged(true);
+              }
+            }}
+            disabled={isDamaged} // Disable the button if already reported
+          >
+            <span className="first-child">
+              {isDamaged ? "Reported" : "Report"}
+            </span>
+            <span className={`last-child ${dustbin.color}`}>
+              {isDamaged ? "Reported" : "Reported"}
+            </span>
+          </button>
+          <button
+            className="button"
+            onClick={() => {
+              handleUpdateDustbin();
+              navigate("/thanks")
+            }}
+          >
+            <span className="first-child">Submit</span>
+            <span className={`last-child ${dustbin.color}`}>Thanks!</span>
+          </button>
+        </div>
+      </div>
     </>
   );
 };
