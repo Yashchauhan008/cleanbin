@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useState } from "react";
+import DustbinList from "../components/DustbinList";
+import DustbinRequests from "../components/DustbinRequests";
+import UserList from "../components/UserList";
 
 const HomePage = () => {
-  return (
-    <div>HomePage</div>
-  )
-}
+  const [list, setList] = useState("dustbinList"); // Corrected setter function
 
-export default HomePage
+  return (
+    <>
+      <div>HomePage</div>
+      <button onClick={() => setList("dustbinList")}>Dustbin List</button>
+      <button onClick={() => setList("userList")}>User List</button>
+      <button onClick={() => setList("dustbinRequests")}>Dustbin Requests</button>
+
+      {/* Conditional rendering */}
+      {list === "dustbinList" && <DustbinList/>}
+      {list === "dustbinRequests" && <DustbinRequests/>}
+      {list === "userList" && <UserList/>}
+    </>
+  );
+};
+
+export default HomePage;

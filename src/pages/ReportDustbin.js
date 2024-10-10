@@ -77,6 +77,7 @@ const ReportDustbin = () => {
         </label>
         <div className="bindata">
           <h2>Filled Up: {filledUp}%</h2>
+          <h2>{dustbin.dustbinName}</h2>
           <h3>Click button to report damaged dustbin</h3>
           <h4 className={`${dustbin.color}`}>{dustbin.type} waste dustbin</h4>
         </div>
