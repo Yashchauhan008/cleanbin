@@ -57,7 +57,7 @@ const ReportDustbin = () => {
     }
   };
 
-  if (!dustbin) return <p>Loading...</p>;
+  if (!dustbin) return <p>Loading...!</p>;
 
   return (
     <>
