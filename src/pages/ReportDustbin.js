@@ -11,12 +11,14 @@ const ReportDustbin = () => {
   const [filledUp, setFillUp] = useState(0);
   const [isDamaged, setIsDamaged] = useState(false);
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+
   useEffect(() => {
     // Fetch dustbin data from the API
     const fetchDustbin = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/dustbins/name/${DustbinId}`
+          `${BASE_URL}/dustbins/name/${DustbinId}`
         );
         setDustbin(response.data);
         setFillUp(response.data.filledUp);
@@ -41,7 +43,7 @@ const ReportDustbin = () => {
       });
 
       const response = await axios.put(
-        `http://localhost:5000/dustbins/name/${DustbinId}`,
+        `${BASE_URL}/dustbins/name/${DustbinId}`,
         {
           filledUp: filledUp,
           isDamaged: isDamaged,
