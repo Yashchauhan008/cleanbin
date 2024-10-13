@@ -151,9 +151,10 @@ ul {
 
 li {
   background-color: #f9f9f9;
+  margin: 0 80px;
   margin-bottom: 10px;
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -163,6 +164,9 @@ li {
 li img {
   cursor: pointer;
   margin-right: 10px;
+}
+.addbin{
+  margin-left: 80px;
 }
 
 button {
@@ -245,4 +249,38 @@ button:hover {
   right: 20px;
   font-size: 24px;
   cursor: pointer;
+}
+.navbar{
+  background-color: rgb(166, 85, 229);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 30px;
+  margin: 20px 80px;
+  border-radius: 100px;
+  /* height: 200px; */
+}
+.nav-left{
+  /* background-color: green; */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.nav-left h2{
+  font-size: 30px;
+  text-transform: capitalize;
+}
+.nav-right input{
+  border-radius: 50px;
+  font-size: 20px;
+  padding: 10px 50px;
+  color: rgb(166, 85, 229) ;
+  outline: rgb(166, 85, 229);
+}
+.nav-right input::placeholder{
+  color: black;
+}
+.nav-right input:focus{
+  outline: none;
 }
